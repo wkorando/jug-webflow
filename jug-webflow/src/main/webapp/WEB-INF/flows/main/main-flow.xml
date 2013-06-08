@@ -4,26 +4,29 @@
 	xsi:schemaLocation="
 http://www.springframework.org/schema/webflow
 http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-
 	<on-start>
-		<evaluate expression="flowHandler.newFlow()" result="flowScope.flow"/>
+		<evaluate expression="flowService.newFlow()" result="flowScope.flow" />
 	</on-start>
 
-	<view-state id="home">
+	<view-state id="home" model="flow">
 		<transition on="next" to="orderPizza" />
 	</view-state>
 
-	<view-state id="orderPizza">
+	<view-state id="orderPizza" model="flow">
+		<on-entry>
+			<evaluate expression="flowService.getPizzaSizes()" result="viewScope.pizzaSizes" />
+			<set name="viewScope.toppings" value="toppings" />
+		</on-entry>
 		<transition on="next" to="address" />
-		<transition on="back" to="home" />
+		<transition on="back" to="home" validate="false" />
 	</view-state>
 
-	<view-state id="address">
+	<view-state id="address" model="flow">
 		<transition on="next" to="confirmation" />
 		<transition on="back" to="orderPizza" />
 	</view-state>
 
-	<view-state id="confirmation">
+	<view-state id="confirmation" model="flow">
 		<transition on="next" to="payment" />
 		<transition on="changeAddress" to="address" />
 		<transition on="changeOrder" to="orderPizza" />
@@ -31,14 +34,14 @@ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	</view-state>
 
 	<subflow-state id="payment" subflow="payment">
-		<input name="flow"/>
+		<input name="flow" />
 		<transition on="paymentSuccessful" to="receipt" />
 		<transition on="cancel" to="confirmation" />
 	</subflow-state>
-	
-	<view-state id="receipt">
-		<transition on="home" to="end"/>
+
+	<view-state id="receipt" model="flow">
+		<transition on="home" to="end" />
 	</view-state>
-	
-	<end-state id="end"/>
+
+	<end-state id="end" />
 </flow>

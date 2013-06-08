@@ -12,4 +12,4 @@
 			type="submit">Submit Payment</form:button>
 	</form:form>
 </div>
-<jsp:include page="../../global-includes/header.jsp" />
+<jsp:include page="../../global-includes/footer.jsp" />

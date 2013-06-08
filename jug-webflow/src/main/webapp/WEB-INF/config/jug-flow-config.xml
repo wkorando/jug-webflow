@@ -6,7 +6,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
 	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
-	<webflow:flow-executor id="flowExecutor"/>
+	<webflow:flow-executor id="flowExecutor" >
+	<webflow:flow-execution-repository max-execution-snapshots="0"/>
+	</webflow:flow-executor>
+	
 
 	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
@@ -29,7 +32,7 @@ http://www.springframework.org/schema/webflow-config http://www.springframework.
 	</bean>
 
 	<webflow:flow-builder-services id="flowBuilderServices"
-	view-factory-creator="mvcViewFactoryCreator" development="true" />
+		view-factory-creator="mvcViewFactoryCreator" />
 
 	<bean id="mvcViewFactoryCreator"
 		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
@@ -38,17 +41,6 @@ http://www.springframework.org/schema/webflow-config http://www.springframework.
 				class="org.springframework.webflow.mvc.builder.FlowResourceFlowViewResolver" />
 		</property>
 		<property name="useSpringBeanBinding" value="true" />
-	</bean>
-
-	<bean id="urlController"
-		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
-
-	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="mappings">
-			<value>
-				/*.htm=urlController
-			</value>
-		</property>
 	</bean>
 
 	<bean

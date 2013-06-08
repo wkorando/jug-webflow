@@ -5,5 +5,14 @@ body {
 #mainDiv {
 	float: left;
 	text-align: center;
-	width: 100%
+	width: 100%;
+}
+
+table,th,td {
+	border: 1px solid black;
+}
+
+#errors {
+	font-weight: bold;
+	color: red;
 }

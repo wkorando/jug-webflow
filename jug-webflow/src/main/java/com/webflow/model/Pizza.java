@@ -1,6 +1,7 @@
 package main.java.com.webflow.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza implements Serializable {
@@ -8,18 +9,25 @@ public class Pizza implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6757951721567345642L;
-	private String size;
-	private List<Topping> toppings;
-	public String getSize() {
+	private PizzaSize size;
+	private List<String> toppings;
+
+	public PizzaSize getSize() {
 		return size;
 	}
-	public void setSize(String size) {
+
+	public void setSize(PizzaSize size) {
 		this.size = size;
 	}
-	public List<Topping> getToppings() {
+
+	public List<String> getToppings() {
+		if(toppings == null){
+			toppings  = new ArrayList<String>();
+		}
 		return toppings;
 	}
-	public void setToppings(List<Topping> toppings) {
+
+	public void setToppings(List<String> toppings) {
 		this.toppings = toppings;
 	}
 }

@@ -10,4 +10,4 @@
 		<form:button name="_eventId_home" value="Home" type="submit">Home</form:button>
 	</form:form>
 </div>
-<jsp:include page="../../global-includes/header.jsp" />
+<jsp:include page="../../global-includes/footer.jsp" />

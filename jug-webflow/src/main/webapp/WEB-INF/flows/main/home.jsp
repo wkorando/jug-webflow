@@ -10,4 +10,4 @@
 		<form:button name="_eventId_next" value="Order a Pizza" type="submit">Order a Pizza</form:button>
 	</form:form>
 </div>
-<jsp:include page="../../global-includes/header.jsp" />
+<jsp:include page="../../global-includes/footer.jsp" />
