@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<view-state id="home">
+		<transition on="orderPizza" to="orderPizza" />
+	</view-state>
+
+	<view-state id="orderPizza">
+		<transition on="next" to="address" />
+		<transition on="back" to="home" />
+	</view-state>
+
+	<view-state id="address">
+		<transition on="next" to="confirmation" />
+		<transition on="back" to="orderPizza" />
+	</view-state>
+
+	<view-state id="confirmation">
+		<transition on="next" to="payment" />
+		<transition on="changeAddress" to="address" />
+		<transition on="changeOrder" to="orderPizza" />
+		<transition on="back" to="address" />
+	</view-state>
+
+	<subflow-state id="payment">
+		<transition on="paymentSuccessful" to="receipt" />
+		<transition on="decline" to="confirmation" />
+	</subflow-state>
+	
+	<view-state id="receipt">
+		<transition on="home" to="end"/>
+	</view-state>
+	
+	<end-state id="end"/>
+</flow>

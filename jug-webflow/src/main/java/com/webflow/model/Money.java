@@ -1,4 +1,4 @@
-package com.webflow.model;
+package main.java.com.webflow.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
