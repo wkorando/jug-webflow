@@ -5,8 +5,12 @@
 http://www.springframework.org/schema/webflow
 http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+	<on-start>
+		<evaluate expression="flowHandler.newFlow()" result="flowScope.flow"/>
+	</on-start>
+
 	<view-state id="home">
-		<transition on="orderPizza" to="orderPizza" />
+		<transition on="next" to="orderPizza" />
 	</view-state>
 
 	<view-state id="orderPizza">
@@ -26,9 +30,10 @@ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 		<transition on="back" to="address" />
 	</view-state>
 
-	<subflow-state id="payment">
+	<subflow-state id="payment" subflow="payment">
+		<input name="flow"/>
 		<transition on="paymentSuccessful" to="receipt" />
-		<transition on="decline" to="confirmation" />
+		<transition on="cancel" to="confirmation" />
 	</subflow-state>
 	
 	<view-state id="receipt">
