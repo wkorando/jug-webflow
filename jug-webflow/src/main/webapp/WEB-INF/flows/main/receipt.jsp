@@ -42,6 +42,11 @@
 						${flow.order.payment.nameOnCard}<br />
 						</c:when>
 						<c:otherwise>
+						${flow.order.payment.routingNumber}<br />
+						${flow.order.payment.accountNumberSecured}<br />
+						${flow.order.payment.formattedDate}<br /> 
+						${flow.order.payment.checkNumber}<br />
+						${flow.order.payment.signature}<br />
 						</c:otherwise>
 					</c:choose>
 				</td>

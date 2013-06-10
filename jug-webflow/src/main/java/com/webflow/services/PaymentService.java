@@ -1,5 +1,6 @@
 package main.java.com.webflow.services;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import main.java.com.webflow.model.CreditCardPayment;
@@ -21,7 +22,7 @@ public class PaymentService {
 		ElectronicCheckPayment eCheckPayment = new ElectronicCheckPayment(
 				order.getOrderTotal());
 		eCheckPayment.setPayableTo("JUG's Pizzeria");
-		eCheckPayment.setDate(new Date());
+		eCheckPayment.setDate(Calendar.getInstance());
 		order.setPayment(eCheckPayment);
 		return eCheckPayment;
 	}

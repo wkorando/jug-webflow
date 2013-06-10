@@ -7,20 +7,28 @@ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	<input name="flow" />
 
 	<view-state id="selectPaymentType">
-		<transition on="creditCard" to="initializeCreditCardPayment" />
+		<transition on="creditCard" to="creditCardPayment" />
 		<transition on="check" to="eCheckPayment" />
 		<transition on="cancel" to="cancel" />
 	</view-state>
 
-	<action-state id="initializeCreditCardPayment">
-		<evaluate expression="paymentService.generateCreditCardPayment(flow.getOrder())"
-			result="flowScope.payment" />
-		<transition to="creditCardPayment" />
-	</action-state>
-
 	<view-state id="creditCardPayment" model="payment">
+		<on-entry>
+			<evaluate expression="paymentService.generateCreditCardPayment(flow.getOrder())"
+				result="flowScope.payment" />
+		</on-entry>
 		<transition on="submitPayment" to="paymentSuccessful" />
-		<transition on="cancel" to="selectPaymentType" />
+		<transition on="cancel" to="selectPaymentType" validate="false" />
+	</view-state>
+
+	<view-state id="eCheckPayment" model="payment">
+		<on-entry>
+			<evaluate
+				expression="paymentService.generateElectronicCheckPayment(flow.getOrder())"
+				result="flowScope.payment" />
+		</on-entry>
+		<transition on="submitPayment" to="paymentSuccessful" />
+		<transition on="cancel" to="selectPaymentType" validate="false" />
 	</view-state>
 
 

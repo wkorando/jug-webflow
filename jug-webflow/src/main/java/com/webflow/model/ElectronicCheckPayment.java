@@ -1,6 +1,10 @@
 package main.java.com.webflow.model;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import main.java.com.webflow.validation.ValidationUtils;
 
 import org.springframework.binding.validation.ValidationContext;
 
@@ -16,7 +20,7 @@ public class ElectronicCheckPayment implements Payment {
 	private String routingNumber;
 	private String accountNumber;
 	private String checkNumber;
-	private Date date;
+	private Calendar date;
 	private String payableTo;
 
 	public String getSignature() {
@@ -39,9 +43,9 @@ public class ElectronicCheckPayment implements Payment {
 		return accountNumber;
 	}
 
-	public String getSecuredAccountNumber() {
-
-		return accountNumber;
+	public String getAccountNumberSecured() {
+		String securedNumber = "************" + accountNumber.substring(6);
+		return securedNumber;
 	}
 
 	public void setAccountNumber(String accountNumber) {
@@ -56,12 +60,22 @@ public class ElectronicCheckPayment implements Payment {
 		this.checkNumber = checkNumber;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
+	}
+
+	public String getFormattedDate() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(date.get(Calendar.MONTH) + 1);
+		buffer.append("-");
+		buffer.append(date.get(Calendar.DAY_OF_MONTH));
+		buffer.append("-");
+		buffer.append(date.get(Calendar.YEAR));
+		return buffer.toString();
 	}
 
 	public String getPayableTo() {
@@ -87,6 +101,36 @@ public class ElectronicCheckPayment implements Payment {
 	}
 
 	public void validateECheckPayment(ValidationContext validationContext) {
-
+		if (ValidationUtils.isEmpty(routingNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "routingNumber",
+					"Must enter a routing number!");
+		} else if (!ValidationUtils.isNumeric(routingNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "routingNumber",
+					"Routing number must be numeric!");
+		} else if (!ValidationUtils.checkLength(routingNumber, 10)) {
+			ValidationUtils.messageBuilder(validationContext, "routingNumber",
+					"Invalid routing number!");
+		}
+		if (ValidationUtils.isEmpty(accountNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "accountNumber",
+					"Must enter an account number!");
+		} else if (!ValidationUtils.isNumeric(accountNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "accountNumber",
+					"Account number must be numeric!");
+		} else if (!ValidationUtils.checkLength(accountNumber, 10)) {
+			ValidationUtils.messageBuilder(validationContext, "accountNumber",
+					"Account routing number!");
+		}
+		if (ValidationUtils.isEmpty(signature)) {
+			ValidationUtils.messageBuilder(validationContext, "signature",
+					"Must give a signature!");
+		}
+		if (ValidationUtils.isEmpty(checkNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "checkNumber",
+					"Must enter a check number!");
+		} else if (!ValidationUtils.isNumeric(accountNumber)) {
+			ValidationUtils.messageBuilder(validationContext, "checkNumber",
+					"Check number must be numeric!");
+		}
 	}
 }

@@ -20,3 +20,10 @@ table,th,td {
 	font-weight: bold;
 	color: red;
 }
+
+#codeRepo{
+	float: right;
+	right: 10px;
+	bottom: 10px;
+	position: fixed;
+}
