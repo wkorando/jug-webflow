@@ -12,7 +12,7 @@
 				<td>Sizes:<br /> <c:forEach items="${pizzaSizes}"
 						var="pizzaSize">
 						<form:radiobutton path="pizza.size"
-							label="${pizzaSize.label} ${pizzaSize.formattedPrice}"
+							label="${pizzaSize.label} ${pizzaSize.money}"
 							value="${pizzaSize}" />
 						&nbsp;&nbsp;&nbsp;
 					</c:forEach></td>

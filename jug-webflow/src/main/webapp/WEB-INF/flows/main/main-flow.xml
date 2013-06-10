@@ -22,6 +22,9 @@ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	</view-state>
 
 	<view-state id="address" model="flow">
+		<on-entry>
+			<set name="viewScope.stateCodeList" value="stateCodeList" />
+		</on-entry>
 		<transition on="next" to="confirmation" />
 		<transition on="back" to="orderPizza" />
 	</view-state>

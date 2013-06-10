@@ -11,7 +11,7 @@ public class Address implements Serializable {
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
-	private Zip zip;
+	private Zip zip = new Zip();
 	private String city;
 	public String getState() {
 		return state;

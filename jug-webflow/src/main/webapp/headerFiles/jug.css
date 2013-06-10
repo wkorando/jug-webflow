@@ -2,10 +2,14 @@ body {
 	font-family: sans-serif;
 }
 
-#mainDiv {
-	float: left;
-	text-align: center;
+#outerDiv {
 	width: 100%;
+}
+
+#mainDiv {
+	text-align: center;
+	margin: 0 auto;
+	width: 40%;
 }
 
 table,th,td {

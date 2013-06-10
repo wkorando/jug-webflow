@@ -25,4 +25,12 @@ public class Zip implements Serializable {
 	public void setZip4(String zip4) {
 		this.zip4 = zip4;
 	}
+
+	@Override
+	public String toString() {
+		if (zip4 != null && !zip4.trim().equals("")) {
+			return zip + "-" + zip4;
+		}
+		return zip;
+	}
 }

@@ -7,8 +7,8 @@ public class Customer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2985716356774223320L;
-	private Name name;
-	private Address address;
+	private Name name = new Name();
+	private Address address = new Address();
 	public Name getName() {
 		return name;
 	}
