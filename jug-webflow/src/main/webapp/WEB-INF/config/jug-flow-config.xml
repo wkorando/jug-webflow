@@ -7,7 +7,7 @@ http://www.springframework.org/schema/webflow-config http://www.springframework.
 
 	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
 	<webflow:flow-executor id="flowExecutor" >
-	<webflow:flow-execution-repository max-execution-snapshots="0"/>
+	<webflow:flow-execution-repository max-execution-snapshots="1"/>
 	</webflow:flow-executor>
 	
 
@@ -33,7 +33,8 @@ http://www.springframework.org/schema/webflow-config http://www.springframework.
 
 	<webflow:flow-builder-services id="flowBuilderServices"
 		view-factory-creator="mvcViewFactoryCreator" />
-
+	
+	<!-- Builds a flow's view states -->
 	<bean id="mvcViewFactoryCreator"
 		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
 		<property name="flowViewResolver">
