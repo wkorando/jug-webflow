@@ -5,7 +5,7 @@
 http://www.springframework.org/schema/webflow
 http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	<on-start>
-		<evaluate expression="flowService.newFlow()" result="flowScope.flow" />
+		<evaluate expression="new main.java.com.webflow.model.Flow()" result="flowScope.flow" />
 	</on-start>
 
 	<view-state id="home" model="flow">
@@ -14,7 +14,7 @@ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<view-state id="orderPizza" model="flow">
 		<on-entry>
-			<evaluate expression="flowService.getPizzaSizes()" result="viewScope.pizzaSizes" />
+			<evaluate expression="T(main.java.com.webflow.model.PizzaSize).values()" result="viewScope.pizzaSizes" />
 			<set name="viewScope.toppings" value="toppings" />
 		</on-entry>
 		<transition on="next" to="address" />
